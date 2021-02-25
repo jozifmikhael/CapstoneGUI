@@ -46,7 +46,7 @@ public class AppEdgeInputController {
     }
     
     private void addLine() {
-        String line = nodeName.getText() +" " +moduleName.getText() +" " +ram.getText() +" " +upbw.getText() +" " +downbw.getText()+" " +nodelvl.getText()+" " +ratePerMIPS.getText() +" " +busyPower.getText()+" " +idlePower.getText() +"\n";
+        String line = parent.getText() +" " +child.getText() +" "+periodicity.getText()+" " +cpuLength.getText() +" " +newLength.getText()+" " +tupleType.getText()+" " +direction.getText() +" " +edgeType.getText()+"\n";
         FileWriter file_writer;
         try {
             file_writer = new FileWriter("edges.txt",true);
@@ -77,9 +77,8 @@ public class AppEdgeInputController {
     		textfile.createTopology(sourceFileName);
     		textfile.writeJSON(jsonFileName);
     }
-    
+
     public Optional<String> getAppEdgeName() {
         return appEdgeName;
     }
-
 }

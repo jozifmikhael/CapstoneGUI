@@ -63,8 +63,6 @@ public class InputBoxController {
             buffered_Writer.write(line);
             buffered_Writer.flush();
             buffered_Writer.close();
-            
-
         } catch (IOException e) {
             System.out.println("Add line failed!" +e);
         }

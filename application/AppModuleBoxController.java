@@ -50,17 +50,14 @@ public class AppModuleBoxController {
     }
     
     private void addLine() {
-        String line = nodeName.getText() +" " +moduleName.getText() +" " +ram.getText() +" " +upbw.getText() +" " +downbw.getText()+" " +nodelvl.getText()+" " +ratePerMIPS.getText() +" " +busyPower.getText()+" " +idlePower.getText() +"\n";
-// https://stackoverflow.com/questions/53020451/how-to-create-javafx-save-read-information-from-text-file-and-letting-user-to-e
-         FileWriter file_writer;
+        String line = nodeName.getText() +" " +moduleName.getText() +" " +ram.getText() +" " +MIPS.getText() +" " +size.getText()+" " +bandwidth.getText()+" "+ inTuple.getText()+" " +outTuple.getText() +" "+fractionalSensitivity.getText() +"\n";
+        FileWriter file_writer;
         try {
             file_writer = new FileWriter("modules.txt",true);
             BufferedWriter buffered_Writer = new BufferedWriter(file_writer);
             buffered_Writer.write(line);
             buffered_Writer.flush();
             buffered_Writer.close();
-            
-
         } catch (IOException e) {
             System.out.println("Add line failed!" +e);
         }
