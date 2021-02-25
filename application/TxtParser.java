@@ -8,11 +8,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class TxtParser {
+	private List<HostSpec> hosts = new ArrayList<HostSpec>();
+	private List<LinkSpec> links = new ArrayList<EdgeSpec>();
+	private List<EdgeSpec> edges = new ArrayList<LinkSpec>();
 	private static BufferedReader br;
 	public static void main(String [] argv) throws NumberFormatException, IOException {
 		String sourceFileName = "instances.txt";
@@ -45,9 +49,6 @@ public class TxtParser {
 			//addLink(e, h, latency);
 		}
 	}
-	
-	private List<HostSpec> hosts = new ArrayList<HostSpec>();
-	private List<LinkSpec> links = new ArrayList<LinkSpec>();
 
 	public HostSpec addHost(String name, int pes, long mips, int ram, long bw) {
 		HostSpec host = new HostSpec(pes, mips, ram, bw);
@@ -98,6 +99,31 @@ public class TxtParser {
 			this.level = 3;
 			this.ipower = 1;
 			this.apower = 3;
+		}
+	}
+	
+	class EdgeSpec {
+	    String parent;
+	    String child;
+	    String tupleType;
+	    double periodicity;
+	    double cpuLength;
+	    double newLength;
+	    String edgeType
+	    int direction = 1;
+		@SuppressWarnings("unchecked")
+		JSONObject toJSON() {
+			EdgeSpec edge = this;
+			JSONObject obj = new JSONObject();
+			obj.put("src", edge.child);
+			obj.put("dest", edge.parent);
+			obj.put("periodicity", edge.periodicity);
+			obj.put("tupleCpuLength", edge.cpuLength);
+			obj.put("tupleNwLength", edge.newLength);
+			obj.put("tupleType", edge.edgeType);
+			obj.put("direction", edge.direction);
+			obj.put("edgeType", edge.edgeType);
+			return obj;
 		}
 	}
 	class LinkSpec {
