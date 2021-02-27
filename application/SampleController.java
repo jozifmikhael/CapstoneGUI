@@ -1,5 +1,8 @@
 package application;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -37,6 +40,12 @@ public class SampleController implements Initializable{
 
     @FXML
     private Button listDeleteBttn;
+    
+    @FXML
+    private TextField simulationTime;
+
+    @FXML
+    private TextField policyView;
     
 	@FXML
     private Button addMobileButton;
@@ -257,5 +266,25 @@ public class SampleController implements Initializable{
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
+    }
+    
+    @FXML
+    void startSim(ActionEvent event) throws IOException {
+    	String policy = simulationTime.getText()+" "+policyView.getText();
+    	FileWriter file_writer;
+        try {
+            file_writer = new FileWriter("simTime.txt",true);
+            BufferedWriter buffered_Writer = new BufferedWriter(file_writer);
+            buffered_Writer.write(policy);
+            buffered_Writer.flush();
+            buffered_Writer.close();
+        } catch (IOException e) {
+            System.out.println("Add line failed!" +e);
+        }
+
+    	String command = "AutoClicker.exe";
+           // Running the above command 
+           Runtime run  = Runtime.getRuntime(); 
+           Process proc = run.exec(command);
     }
 }

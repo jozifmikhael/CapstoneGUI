@@ -15,8 +15,8 @@ import org.json.simple.JSONObject;
 
 public class TxtParser {
 	private List<HostSpec> hosts = new ArrayList<HostSpec>();
-	private List<LinkSpec> links = new ArrayList<EdgeSpec>();
-	private List<EdgeSpec> edges = new ArrayList<LinkSpec>();
+	private List<LinkSpec> links = new ArrayList<LinkSpec>();
+	private List<EdgeSpec> edges = new ArrayList<EdgeSpec>();
 	private static BufferedReader br;
 	public static void main(String [] argv) throws NumberFormatException, IOException {
 		String sourceFileName = "instances.txt";
@@ -109,7 +109,7 @@ public class TxtParser {
 	    double periodicity;
 	    double cpuLength;
 	    double newLength;
-	    String edgeType
+	    String edgeType;
 	    int direction = 1;
 		@SuppressWarnings("unchecked")
 		JSONObject toJSON() {

@@ -54,7 +54,7 @@ public class InputBoxController {
     }
     
     private void addLine() {
-        String line = name.getText() +" " +mips.getText() +" " +ram.getText() +" " +upbw.getText() +" " +downbw.getText()+" " +nodelvl.getText()+" " +ratePerMIPS.getText() +" " +busyPower.getText()+" " +idlePower.getText() +"\n";
+        String line = name.getText().toString() +" " +mips.getText() +" " +ram.getText() +" " +upbw.getText() +" " +downbw.getText()+" " +nodelvl.getText()+" " +ratePerMIPS.getText() +" " +busyPower.getText()+" " +idlePower.getText() +"\n";
 // https://stackoverflow.com/questions/53020451/how-to-create-javafx-save-read-information-from-text-file-and-letting-user-to-e
          FileWriter file_writer;
         try {
@@ -76,7 +76,6 @@ public class InputBoxController {
 				e.printStackTrace();
 			}
     }
-    
     public void TxtParser() throws Exception, IOException {
 		String sourceFileName = "instances.txt";
 		String jsonFileName = "test6.json";
@@ -84,8 +83,7 @@ public class InputBoxController {
     		textfile.createTopology(sourceFileName);
     		textfile.writeJSON(jsonFileName);
     }
-
-
+    
 	public Optional<String> getNodeName() {
         return nodeName;
     }
