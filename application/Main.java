@@ -24,12 +24,8 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws Exception {
-<<<<<<< HEAD
 		System.out.println("just testing git");
 		new VRGameFog_src("test6.json");
-=======
-		new VRGameFog_src();
->>>>>>> parent of 1584e85... Updated call signature of main sim
 		launch(args);
 	}
 }
