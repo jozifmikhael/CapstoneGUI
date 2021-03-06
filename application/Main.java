@@ -24,6 +24,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws Exception {
+		System.out.println("just testing git");
 		new VRGameFog_src("test6.json");
 		launch(args);
 	}
