@@ -17,6 +17,8 @@ public class TxtParser {
 	private List<HostSpec> hosts = new ArrayList<HostSpec>();
 	private List<LinkSpec> links = new ArrayList<LinkSpec>();
 	private List<EdgeSpec> edges = new ArrayList<EdgeSpec>();
+	private List<ModuleSpec> modules = new ArrayList<ModuleSpec>();
+	
 	private static BufferedReader br;
 	public static void main(String [] argv) throws NumberFormatException, IOException {
 		String sourceFileName = "instances.txt";
@@ -57,6 +59,15 @@ public class TxtParser {
 		hosts.add(host);
 		return host;
 	}
+	/*
+	public ModuleSpec addModule(String name, int ram, int mips, long size, long bw) {
+		ModuleSpec module = new ModuleSpec(name, ram, mips, size, bw);
+		module.name = "name";
+		module.type = "module";
+		modules.add(module);
+		return module;
+	}
+	*/
 	
 	private void addLink(NodeSpec source, NodeSpec dest, double latency) {
 		links.add(new LinkSpec(source.name, dest.name, latency));
@@ -147,6 +158,31 @@ public class TxtParser {
 		}
 	}
 	
+	
+	class ModuleSpec {
+		
+		String nodeName;
+		String moduleName;
+		int ram;
+		long bandwidth;
+		String inTuple;
+		String outTuple;
+		long size;
+		int MIPS;
+		double fractionalSensitivity;
+		@SuppressWarnings("unchecked") 
+		JSONObject toJSON() {
+			ModuleSpec module = this;
+			JSONObject obj = new JSONObject();
+			obj.put("name", module.moduleName);
+			obj.put("ram", module.ram);
+			obj.put("mips", module.MIPS);
+			obj.put("size", module.size);
+			obj.put("bw", module.bandwidth);
+			return obj;
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void writeJSON(String jsonFileName) {
 		JSONObject obj = new JSONObject();
@@ -164,7 +200,7 @@ public class TxtParser {
 		obj.put("links", linkList);
 	 
 		try {
-			FileWriter file = new FileWriter(jsonFileName);
+			FileWriter file = new FileWriter(jsonFileName, true);
 			file.write(obj.toJSONString().replaceAll(",", ",\n"));
 			file.flush();
 			file.close();
@@ -174,3 +210,4 @@ public class TxtParser {
 		System.out.println(obj);
 	}
 }
+

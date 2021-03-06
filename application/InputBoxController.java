@@ -76,9 +76,13 @@ public class InputBoxController {
 				e.printStackTrace();
 			}
     }
+    
+    String jsonDestinationFileName = createJsonController.jsonDestinationFileName;
+    
     public void TxtParser() throws Exception, IOException {
 		String sourceFileName = "instances.txt";
-		String jsonFileName = "test6.json";
+		//String jsonFileName = "test6.json";
+		String jsonFileName = jsonDestinationFileName + ".json";
     	TxtParser textfile = new TxtParser();
     		textfile.createTopology(sourceFileName);
     		textfile.writeJSON(jsonFileName);

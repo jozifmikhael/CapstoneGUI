@@ -72,9 +72,12 @@ public class AppModuleBoxController {
 			}
     }
     
+    String jsonDestinationFileName = createJsonController.jsonDestinationFileName;
+    
     public void TxtParser() throws Exception, IOException {
 		String sourceFileName = "modules.txt";
-		String jsonFileName = "test6.json";
+		String jsonFileName = jsonDestinationFileName + ".json";
+		//String jsonFileName = "test6.json";
     	TxtParser textfile = new TxtParser();
     		textfile.createTopology(sourceFileName);
     		textfile.writeJSON(jsonFileName);

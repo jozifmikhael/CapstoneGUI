@@ -1,10 +1,2 @@
-{"nodes":[{"apower":3.0,
-"level":3,
-"rate":0.0,
-"ipower":1.0,
-"name":"mobile1",
-"down_bw":10000,
-"mips":800,
-"up_bw":10000,
-"ram":10240}],
+{"nodes":[],
 "links":[]}

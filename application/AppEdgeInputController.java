@@ -70,9 +70,12 @@ public class AppEdgeInputController {
 			}
     }
     
+    String jsonDestinationFileName = createJsonController.jsonDestinationFileName;
+    
     public void TxtParser() throws Exception, IOException {
 		String sourceFileName = "edges.txt";
-		String jsonFileName = "test6.json";
+		String jsonFileName = jsonDestinationFileName + ".json";
+		//String jsonFileName = "test6.json";
     	TxtParser textfile = new TxtParser();
     		textfile.createTopology(sourceFileName);
     		textfile.writeJSON(jsonFileName);

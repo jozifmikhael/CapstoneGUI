@@ -49,6 +49,9 @@ public class SampleController implements Initializable{
     
 	@FXML
     private Button addMobileButton;
+	
+    @FXML
+    private Button createJsonButton;
 		
     //@FXML
     //private Button addCloudButton;
@@ -66,6 +69,9 @@ public class SampleController implements Initializable{
 
     @FXML
     private Button addAppEdge;
+    
+    @FXML
+    private MenuItem resettxt;
 
     private ObservableList<String> devices = FXCollections.observableArrayList();
     //private ObservableList<String> sensors= FXCollections.observableArrayList();
@@ -287,4 +293,39 @@ public class SampleController implements Initializable{
            Runtime run  = Runtime.getRuntime(); 
            Process proc = run.exec(command);
     }
+     
+    @FXML
+    void createJson(ActionEvent event) {
+    	try {	
+    		BorderPane root = FXMLLoader.load(getClass().getResource("createJsonBox.fxml"));
+    		Scene scene = new Scene(root,414,139);
+    		Stage stage = new Stage();
+    		stage.setScene(scene);
+    		stage.setTitle("Create New Design File");
+    		stage.show();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+	}
+    
+    @FXML
+    void resetalltxt(ActionEvent event) {
+    	System.out.println("resetting all text files");
+    	FileWriter file_writer;
+        try {
+            file_writer = new FileWriter("instances.txt",false);
+            file_writer = new FileWriter("edges.txt",false);
+            file_writer = new FileWriter("modules.txt",false);
+            BufferedWriter buffered_Writer = new BufferedWriter(file_writer);
+         //   buffered_Writer.write(line);
+            buffered_Writer.flush();
+            buffered_Writer.close();
+            
+
+        } catch (IOException e) {
+            System.out.println("Add line failed!" +e);
+        }
+    }
+
+    
 }
