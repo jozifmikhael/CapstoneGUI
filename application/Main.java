@@ -24,7 +24,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		new VRGameFog_src();
+		new VRGameFog_src("test6.json");
 		launch(args);
 	}
 }
