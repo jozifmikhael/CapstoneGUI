@@ -1,0 +1,10 @@
+{"nodes":[{"apower":3.0,
+"level":3,
+"rate":0.0,
+"ipower":1.0,
+"name":"test_mod",
+"down_bw":1,
+"mips":1,
+"up_bw":1,
+"ram":10240}],
+"links":[]}

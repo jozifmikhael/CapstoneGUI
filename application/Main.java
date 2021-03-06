@@ -3,9 +3,10 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
-
+import org.fog.test.perfeval.VRGameFog_src;
 
 public class Main extends Application {
 	@Override
@@ -22,7 +23,8 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		new VRGameFog_src();
 		launch(args);
 	}
 }

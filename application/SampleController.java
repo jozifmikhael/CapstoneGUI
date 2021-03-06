@@ -18,6 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class SampleController implements Initializable{
 	@FXML
@@ -69,9 +74,12 @@ public class SampleController implements Initializable{
 
     @FXML
     private Button addAppEdge;
-    
+
     @FXML
     private MenuItem resettxt;
+    
+    @FXML
+    private Canvas topoField;
 
     private ObservableList<String> devices = FXCollections.observableArrayList();
     //private ObservableList<String> sensors= FXCollections.observableArrayList();
@@ -80,9 +88,20 @@ public class SampleController implements Initializable{
     @FXML
     private ListView<String> policyList;
     
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	
+    	System.out.println("init");
+//    	topoField();
+    }
+
+
+    @FXML
+    private void topoField(){
+    	GraphicsContext gc = topoField.getGraphicsContext2D();
+    	gc.setFill(Color.GREEN);
+    	gc.setStroke(Color.BLUE);
+    	gc.fillOval(100, 100, 20, 20);
     }
     
     @FXML
