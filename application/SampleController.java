@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,12 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
-import javafx.application.Platform;
 
 public class SampleController implements Initializable{
 	@FXML
@@ -75,12 +71,9 @@ public class SampleController implements Initializable{
 
     @FXML
     private Button addAppEdge;
-
-    @FXML
-    private MenuItem resettxt;
     
     @FXML
-    private Canvas topoField;
+    private MenuItem resettxt;
 
     private ObservableList<String> devices = FXCollections.observableArrayList();
     //private ObservableList<String> sensors= FXCollections.observableArrayList();
@@ -89,20 +82,9 @@ public class SampleController implements Initializable{
     @FXML
     private ListView<String> policyList;
     
-    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	System.out.println("init");
-//    	topoField();
-    }
-
-
-    @FXML
-    private void topoField(){
-    	GraphicsContext gc = topoField.getGraphicsContext2D();
-    	gc.setFill(Color.GREEN);
-    	gc.setStroke(Color.BLUE);
-    	gc.fillOval(100, 100, 20, 20);
+    	
     }
     
     @FXML
@@ -117,10 +99,10 @@ public class SampleController implements Initializable{
 		stage.setTitle("Add App Edge");
 		stage.showAndWait();
 		Optional<String> edge = saveNewNodeController.getAppEdgeName();
-		if(edge.isPresent()) {
+		/*if(edge.isPresent()) {
 			devices.add(edge.get());	
 		}
-		policyList.setItems(devices);
+		policyList.setItems(devices);*/
 	} catch(Exception e) {
 		e.printStackTrace();
 	}
@@ -139,10 +121,10 @@ public class SampleController implements Initializable{
     		stage.setTitle("Add App Module");
     		stage.showAndWait();
     		Optional<String> module = saveNewNodeController.getAppModuleName();
-    		if(module.isPresent()) {
+    		/*if(module.isPresent()) {
     			devices.add(module.get());	
     		}
-    		policyList.setItems(devices);
+    		policyList.setItems(devices); */
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
@@ -240,10 +222,17 @@ public class SampleController implements Initializable{
     		stage.setTitle("Add Mobile Node");
     		stage.showAndWait();
     		Optional<String> node = saveNewNodeController.getNodeName();
-    		if(node.isPresent()) {
+    		/*if (node == null || node.isEmpty()) {
+            	node = Optional.of("");
+           }*/
+    		/* if(node.isPresent()) {
     			devices.add(node.get());	
+    			policyList.setItems(devices); 
     		}
-    		policyList.setItems(devices);
+    		else {
+    			
+    		}*/
+    		//policyList.setItems(devices); 
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
@@ -289,6 +278,7 @@ public class SampleController implements Initializable{
     		stage.setScene(scene);
     		stage.setTitle("Add Sensor");
     		stage.show();
+    		
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
@@ -315,21 +305,23 @@ public class SampleController implements Initializable{
     }
      
     @FXML
-    void createJson(ActionEvent event) {
+    public void createJson(ActionEvent event) {
     	try {	
     		BorderPane root = FXMLLoader.load(getClass().getResource("createJsonBox.fxml"));
     		Scene scene = new Scene(root,414,139);
     		Stage stage = new Stage();
     		stage.setScene(scene);
     		stage.setTitle("Create New Design File");
-    		stage.show();
+    		stage.show();    		
+    		//stage.close();
+    		
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
 	}
     
     @FXML
-    public void resetalltxt(ActionEvent event) {
+    void resetalltxt(ActionEvent event) {
     	System.out.println("resetting all text files");
     	FileWriter file_writer;
         try {
@@ -351,5 +343,6 @@ public class SampleController implements Initializable{
     public void exitApplication(ActionEvent event) {
        Platform.exit();
     }
+
     
 }
