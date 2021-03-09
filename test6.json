@@ -1,2 +1,11 @@
 {"nodes":[],
+"links":[]}{"nodes":[{"apower":3.0,
+"level":3,
+"rate":0.0,
+"ipower":1.0,
+"name":"default_mobile",
+"down_bw":0,
+"mips":0,
+"up_bw":0,
+"ram":10240}],
 "links":[]}

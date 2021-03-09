@@ -1,0 +1,55 @@
+
+Hanzala@DESKTOP-QUOF7JC MINGW64 ~/Documents/test2/test (master)
+$ git add --all
+warning: LF will be replaced by CRLF in .gitignore.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in application/Sample.fxml.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in test6.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in application/.gitignore.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in application/createJsonBox.fxml.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in blesslootlife.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in fulltest.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in null.json.
+The file will have its original line endings in your working directory
+
+Hanzala@DESKTOP-QUOF7JC MINGW64 ~/Documents/test2/test (master)
+$ git commit -m "Updated GUI"
+[master f9cf658] Updated GUI
+ 25 files changed, 860 insertions(+), 20 deletions(-)
+ create mode 100644 application/.gitignore
+ rewrite application/AppEdgeInputController.class (80%)
+ rewrite application/AppModuleBoxController.class (80%)
+ rewrite application/InputBoxController.class (81%)
+ rewrite application/SampleController.class (75%)
+ rewrite application/TxtParser$EdgeSpec.class (64%)
+ rewrite application/TxtParser$HostSpec.class (94%)
+ rewrite application/TxtParser$LinkSpec.class (62%)
+ rewrite application/TxtParser.class (84%)
+ create mode 100644 application/createJsonBox.fxml
+ create mode 100644 application/createJsonController.java
+ create mode 100644 blesslootlife.json
+ create mode 100644 fulltest.json
+ create mode 100644 null.json
+
+Hanzala@DESKTOP-QUOF7JC MINGW64 ~/Documents/test2/test (master)
+$ git push origin master
+
+Unhandled Exception: System.ComponentModel.Win32Exception: Invalid window handle
+   at MS.Win32.ManagedWndProcTracker.HookUpDefWindowProc(IntPtr hwnd)
+   at MS.Win32.ManagedWndProcTracker.OnAppDomainProcessExit()
+   at MS.Internal.ShutDownListener.HandleShutDown(Object sender, EventArgs e)
+Enumerating objects: 39, done.
+Counting objects: 100% (39/39), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (24/24), done.
+Writing objects: 100% (26/26), 18.00 KiB | 3.00 MiB/s, done.
+Total 26 (delta 11), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (11/11), completed with 7 local objects.
+To https://github.com/jozifmikhael/CapstoneGUI
+   022302b..f9cf658  master -> master

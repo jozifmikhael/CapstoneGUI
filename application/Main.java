@@ -1,5 +1,9 @@
 package application;
 	
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -24,5 +28,21 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	@Override
+	public void stop(){
+	    System.out.println("Default JSON Design File Self-Destructing...");
+	    FileWriter file_writer;
+        try {
+            file_writer = new FileWriter("default.json",false);
+            BufferedWriter buffered_Writer = new BufferedWriter(file_writer);        
+            buffered_Writer.flush();
+            buffered_Writer.close();
+            
+
+        } catch (IOException e) {
+            System.out.println("Overwrite Null failed" +e);
+        }
 	}
 }
