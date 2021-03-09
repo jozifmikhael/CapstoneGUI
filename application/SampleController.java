@@ -15,9 +15,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.canvas.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class SampleController implements Initializable{
 	@FXML
@@ -72,6 +79,9 @@ public class SampleController implements Initializable{
     
     @FXML
     private MenuItem resettxt;
+    
+    @FXML
+    private Canvas topoField;
 
     private ObservableList<String> devices = FXCollections.observableArrayList();
     //private ObservableList<String> sensors= FXCollections.observableArrayList();
@@ -325,6 +335,14 @@ public class SampleController implements Initializable{
         } catch (IOException e) {
             System.out.println("Add line failed!" +e);
         }
+    }
+    
+    @FXML
+    void topoField() {
+		GraphicsContext gc = topoField.getGraphicsContext2D();
+    	gc.setFill(Color.GREEN);
+        gc.setStroke(Color.BLUE);
+        gc.fillOval(100, 100, 30, 30);
     }
 
     
