@@ -50,6 +50,7 @@ public class AppModuleBoxController {
     }
     
     private void addLine() {
+    	nodeName.setText("default_module"); moduleName.setText("0"); ram.setText("0"); MIPS.setText("0"); size.setText("0"); bandwidth.setText("0"); inTuple.setText("0"); outTuple.setText("0"); fractionalSensitivity.setText("0");
         String line = nodeName.getText() +" " +moduleName.getText() +" " +ram.getText() +" " +MIPS.getText() +" " +size.getText()+" " +bandwidth.getText()+" "+ inTuple.getText()+" " +outTuple.getText() +" "+fractionalSensitivity.getText() +"\n";
         FileWriter file_writer;
         try {

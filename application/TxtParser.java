@@ -34,26 +34,36 @@ public class TxtParser {
 		br = new BufferedReader(new FileReader(file));
 		String st;
 
-		long insNetworkSpeed=0;
-		long insProcessingSpeed=0;
+		long insProcessingSpeed=0;	
+		int insMemory=0;
+		long insNetworkSpeedUp=0;
+		long insNetworkSpeedDown=0;		
+		int insLevel=0;			
+		double insCostProcessing;		
+		double insBusyPower;
+		double insIdlePower;
 		double insServiceCharge;
-		double insCostProcessing;
 		double insCostNetworking;
+		
 		while ((st = br.readLine()) != null) {
 			String stParts[] = st.split(" ");
-			String hostname = stParts[0];
-			insNetworkSpeed = (long)Double.parseDouble(stParts[1]);
-			insProcessingSpeed = (long)Double.parseDouble(stParts[2]);
-			insServiceCharge = Double.parseDouble(stParts[3]);
-			insCostProcessing = Double.parseDouble(stParts[4]);
-			insCostNetworking = Double.parseDouble(stParts[5]);
-			HostSpec h = addHost(hostname, 5, insProcessingSpeed, 10240, insNetworkSpeed);
+			String hostname = stParts[0];			
+			insProcessingSpeed = (long)Double.parseDouble(stParts[1]);
+			insMemory = (int)Double.parseDouble(stParts[2]);
+			insNetworkSpeedUp = (long)Double.parseDouble(stParts[3]);
+			insNetworkSpeedDown = (long)Double.parseDouble(stParts[4]);
+			insLevel = (int)Double.parseDouble(stParts[5]);
+			insCostProcessing = Double.parseDouble(stParts[6]);
+			//insCostNetworking = Double.parseDouble(stParts[7]);
+			insBusyPower = Double.parseDouble(stParts[7]);
+			insIdlePower = Double.parseDouble(stParts[8]);
+			HostSpec h = addHost(hostname, insProcessingSpeed, insMemory, insNetworkSpeedUp, insNetworkSpeedDown, insLevel, insCostProcessing, insBusyPower, insIdlePower);
 			//addLink(e, h, latency);
 		}
 	}
 
-	public HostSpec addHost(String name, int pes, long mips, int ram, long bw) {
-		HostSpec host = new HostSpec(pes, mips, ram, bw);
+	public HostSpec addHost(String name, long mips, int ram, long upbw, long downbw, int level, double rate, double apower, double ipower) {
+		HostSpec host = new HostSpec(mips, ram, upbw, downbw, level, rate, apower, ipower);
 		host.name = name;
 		host.type = "host";
 		hosts.add(host);
@@ -76,7 +86,8 @@ public class TxtParser {
 	class NodeSpec {
 		String name;
 		String type;
-		long bw;
+		long upbw;
+		long downbw;
 	}
 	class HostSpec extends NodeSpec {
 		int pe;
@@ -95,21 +106,23 @@ public class TxtParser {
 			obj.put("ipower", o.ipower);
 			obj.put("mips", o.mips);
 			obj.put("ram", o.ram);
-			obj.put("up_bw", o.bw);
+			obj.put("up_bw", o.upbw);
 			obj.put("name", o.name);
-			obj.put("down_bw", o.bw);
+			obj.put("down_bw", o.downbw);
 			obj.put("level", o.level);
 			obj.put("rate", o.rate);
 			return obj;
 		}
-		public HostSpec(int pe, long mips, int ram, long bw) {
-			this.pe = pe;
+		public HostSpec(long mips, int ram, long upbw, long downbw, int level, double rate, double apower, double ipower) {
 			this.mips = mips;
 			this.ram = ram;
-			this.bw = bw;
-			this.level = 3;
-			this.ipower = 1;
-			this.apower = 3;
+			this.upbw = upbw;
+			this.downbw = downbw;
+			this.level = level;
+			this.rate = rate;			
+			this.apower = apower;
+			this.ipower = ipower;
+			
 		}
 	}
 	
@@ -200,7 +213,7 @@ public class TxtParser {
 		obj.put("links", linkList);
 	 
 		try {
-			FileWriter file = new FileWriter(jsonFileName, true);
+			FileWriter file = new FileWriter(jsonFileName, false);
 			file.write(obj.toJSONString().replaceAll(",", ",\n"));
 			file.flush();
 			file.close();

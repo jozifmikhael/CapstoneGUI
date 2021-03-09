@@ -17,7 +17,7 @@ public class InputBoxController {
 	Optional<String> nodeName;
 	
 	@FXML
-    private TextField name;
+	private TextField name = new TextField();
 
     @FXML
     private TextField mips;
@@ -47,11 +47,39 @@ public class InputBoxController {
     private TextField idlePower;
 
     @FXML
-    void saveNodeHandler(ActionEvent event) {
-    	nodeName = Optional.of(name.getText());  	
-    	addLine();
-    	
-    }
+	void saveNodeHandler(ActionEvent event) {
+ 	   if (name.getText().trim().isEmpty()) {
+ 		   name.setText("default_mobile");
+ 	   		 } 
+ 	   if (mips.getText().trim().isEmpty()) {
+ 	    	 mips.setText("999");
+ 	         } 
+ 	   if (ram.getText().trim().isEmpty()) {
+ 		   ram.setText("0");
+ 	         } 
+ 	   if (upbw.getText().trim().isEmpty()) {
+ 		   upbw.setText("0");
+ 	         } 
+ 	   if (downbw.getText().trim().isEmpty()) {
+ 		   downbw.setText("0");
+ 	         } 
+ 	   if (nodelvl.getText().trim().isEmpty()) {
+ 		   nodelvl.setText("0");
+ 	         } 
+ 	   if (ratePerMIPS.getText().trim().isEmpty()) {
+ 		   ratePerMIPS.setText("0");
+ 	         } 
+ 	   if (busyPower.getText().trim().isEmpty()) {
+ 		   busyPower.setText("0");
+ 	         } 
+ 	   if (idlePower.getText().trim().isEmpty()) {
+ 		   idlePower.setText("0");
+ 	         } 
+ 	   
+ 	nodeName = Optional.of(name.getText());  	
+ 	addLine();
+ 	
+ }
     
     private void addLine() {
         String line = name.getText().toString() +" " +mips.getText() +" " +ram.getText() +" " +upbw.getText() +" " +downbw.getText()+" " +nodelvl.getText()+" " +ratePerMIPS.getText() +" " +busyPower.getText()+" " +idlePower.getText() +"\n";

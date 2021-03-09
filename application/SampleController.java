@@ -23,6 +23,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import javafx.application.Platform;
 
 public class SampleController implements Initializable{
 	@FXML
@@ -328,7 +329,7 @@ public class SampleController implements Initializable{
 	}
     
     @FXML
-    void resetalltxt(ActionEvent event) {
+    public void resetalltxt(ActionEvent event) {
     	System.out.println("resetting all text files");
     	FileWriter file_writer;
         try {
@@ -345,6 +346,10 @@ public class SampleController implements Initializable{
             System.out.println("Add line failed!" +e);
         }
     }
-
+    
+    @FXML
+    public void exitApplication(ActionEvent event) {
+       Platform.exit();
+    }
     
 }

@@ -6,10 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class createJsonController {
+public class createJsonController extends SampleController {
 	
-	public static String jsonDestinationFileName;
+	public static String jsonDestinationFileName = "default";
 
     @FXML
     private ResourceBundle resources;
@@ -25,10 +26,14 @@ public class createJsonController {
 
     @FXML
     void saveJsonNameHandler(ActionEvent event) {
+    	//Stage stage = (Stage) setJsonName.getScene().getWindow();
+        Stage stage = (Stage) setJsonName.getScene().getWindow();
         jsonDestinationFileName = designName.getText().toString();
-        System.out.println(jsonDestinationFileName + "\n");
-
-
+        if (designName.getText() == null || designName.getText().trim().isEmpty()) {
+        	jsonDestinationFileName = "default";
+       }
+        System.out.println(jsonDestinationFileName + "\n");    
+        stage.close();
     }
 
     @FXML
