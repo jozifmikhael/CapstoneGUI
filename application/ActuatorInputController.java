@@ -18,7 +18,7 @@ public class ActuatorInputController {
 	@FXML
 	private TextField actuatorAppID;
 
-	    @FXML
+	@FXML
 	private Button saveActuator;
 
 	@FXML

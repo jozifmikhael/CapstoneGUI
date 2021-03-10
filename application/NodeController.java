@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
-public class InputBoxController {
+public class NodeController {
 	public String nodeName;
 	
 	@FXML

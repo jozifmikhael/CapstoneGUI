@@ -23,7 +23,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.canvas.*;
 
-public class SampleController implements Initializable{
+public class MainWindowController implements Initializable{
 	public List<String> str_list = new ArrayList<String>();
 	
 	@FXML
@@ -132,7 +132,7 @@ public class SampleController implements Initializable{
     		Scene scene = new Scene(addAppModuleLoader.load(),414,346);
     		Stage stage = new Stage();
     		stage.setScene(scene);
-    		AppModuleBoxController saveNewNodeController = addAppModuleLoader.getController();
+    		AppModuleController saveNewNodeController = addAppModuleLoader.getController();
     		saveNewNodeController.populateList(str_list);
     		stage.setTitle("Add App Module");
     		saveNewNodeController.setName("ss");
@@ -236,7 +236,7 @@ public class SampleController implements Initializable{
     		Scene scene = new Scene(addNewNodeLoader.load(),450,320);
     		Stage stage = new Stage();
     		stage.setScene(scene);
-    		InputBoxController saveNewNodeController = addNewNodeLoader.getController();
+    		NodeController saveNewNodeController = addNewNodeLoader.getController();
     		stage.setTitle("Add Mobile Node");
     		stage.showAndWait();
     		str_list.add(saveNewNodeController.getNodeName().toString());

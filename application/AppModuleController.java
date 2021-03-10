@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
-public class AppModuleBoxController {
+public class AppModuleController {
 	private String newStr;
 	public void setName(String inp) {
 		newStr=inp;
