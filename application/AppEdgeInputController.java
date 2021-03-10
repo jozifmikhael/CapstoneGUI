@@ -3,7 +3,6 @@ package application;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class AppEdgeInputController {
-	Optional<String> appEdgeName;
+	String appEdgeName;
     @FXML
     private TextField parent;
 
@@ -41,7 +40,7 @@ public class AppEdgeInputController {
 
     @FXML
     void saveAppEdgeHandler(ActionEvent event) {
-    	appEdgeName = Optional.of(parent.getText()+"-"+child.getText()+" edge");
+    	appEdgeName = parent.getText()+"-"+child.getText()+" edge";
     	addLine();
     }
     
@@ -82,7 +81,7 @@ public class AppEdgeInputController {
     		textfile.writeJSON(jsonFileName);
     }
 
-    public Optional<String> getAppEdgeName() {
+    public String getAppEdgeName() {
         return appEdgeName;
     }
 }

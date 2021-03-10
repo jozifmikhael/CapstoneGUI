@@ -4,7 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -20,8 +21,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.canvas.*;
 
 public class SampleController implements Initializable{
+	public List<String> str_list = new ArrayList<String>();
+	
 	@FXML
     private TextField deviceField;
 	
@@ -51,9 +55,12 @@ public class SampleController implements Initializable{
     
 	@FXML
     private Button addMobileButton;
-	
+
     @FXML
     private Button createJsonButton;
+    
+    @FXML
+    private Canvas topoField;
 		
     //@FXML
     //private Button addCloudButton;
@@ -84,7 +91,14 @@ public class SampleController implements Initializable{
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	
+    	System.out.println("Init");
+    	str_list.add("test1");
+    	str_list.add("test2");
+//    	topoField.addEventHandler(MouseEvent.MOUSE_CLICKED, mEvent->mouseClickHandler(mEvent));
+    }
+    
+    private void mouseClickHandler(MouseEvent mEvent){
+    	System.out.println(mEvent.getSceneX()+", "+mEvent.getSceneY());
     }
     
     @FXML
@@ -96,9 +110,10 @@ public class SampleController implements Initializable{
 		Stage stage = new Stage();
 		stage.setScene(scene);
 		AppEdgeInputController saveNewNodeController = addAppEdgeLoader.getController();
+		
 		stage.setTitle("Add App Edge");
 		stage.showAndWait();
-		Optional<String> edge = saveNewNodeController.getAppEdgeName();
+		String edge = saveNewNodeController.getAppEdgeName();
 		/*if(edge.isPresent()) {
 			devices.add(edge.get());	
 		}
@@ -118,9 +133,12 @@ public class SampleController implements Initializable{
     		Stage stage = new Stage();
     		stage.setScene(scene);
     		AppModuleBoxController saveNewNodeController = addAppModuleLoader.getController();
+    		saveNewNodeController.populateList(str_list);
     		stage.setTitle("Add App Module");
+    		saveNewNodeController.setName("ss");
     		stage.showAndWait();
-    		Optional<String> module = saveNewNodeController.getAppModuleName();
+    		
+    		String module = saveNewNodeController.getAppModuleName();
     		/*if(module.isPresent()) {
     			devices.add(module.get());	
     		}
@@ -221,7 +239,10 @@ public class SampleController implements Initializable{
     		InputBoxController saveNewNodeController = addNewNodeLoader.getController();
     		stage.setTitle("Add Mobile Node");
     		stage.showAndWait();
-    		Optional<String> node = saveNewNodeController.getNodeName();
+    		str_list.add(saveNewNodeController.getNodeName().toString());
+    		for(String name : str_list) {
+    			System.out.println(name.toString());
+    		}
     		/*if (node == null || node.isEmpty()) {
             	node = Optional.of("");
            }*/

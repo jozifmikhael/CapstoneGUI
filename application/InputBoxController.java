@@ -1,6 +1,5 @@
 package application;
 
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +13,7 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 public class InputBoxController {
-	Optional<String> nodeName;
+	public String nodeName;
 	
 	@FXML
 	private TextField name = new TextField();
@@ -76,7 +75,7 @@ public class InputBoxController {
  		   idlePower.setText("0");
  	         } 
  	   
- 	nodeName = Optional.of(name.getText());  	
+ 	nodeName = name.getText();
  	addLine();
  	
  }
@@ -116,7 +115,7 @@ public class InputBoxController {
     		textfile.writeJSON(jsonFileName);
     }
     
-	public Optional<String> getNodeName() {
+	public String getNodeName() {
         return nodeName;
     }
 

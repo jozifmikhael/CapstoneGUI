@@ -3,21 +3,33 @@ package application;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 public class AppModuleBoxController {
-	Optional<String> appModuleName;
+	private String newStr;
+	public void setName(String inp) {
+		newStr=inp;
+		System.out.println("Set str to " + inp);
+	}
+	
+	String appModuleName;
 	
 	@FXML
     private TextField nodeName;
 
     @FXML
     private TextField moduleName;
+    
+    @FXML
+    private ChoiceBox<String> nodeBox;
 
     @FXML
     private TextField ram;
@@ -45,8 +57,14 @@ public class AppModuleBoxController {
     
     @FXML
     void saveModuleHandler(ActionEvent event) {
-    	appModuleName = Optional.of(moduleName.getText());
+    	appModuleName = moduleName.getText();
     	addLine();
+    }
+    
+    void populateList(List<String> str_list) {
+    	ObservableList<String> items = FXCollections.observableArrayList();
+    	items.addAll(str_list);
+    	nodeBox.setItems(items);
     }
     
     private void addLine() {
@@ -84,7 +102,7 @@ public class AppModuleBoxController {
     		textfile.writeJSON(jsonFileName);
     }
     
-    public Optional<String> getAppModuleName() {
+    public String getAppModuleName() {
         return appModuleName;
     }
 }

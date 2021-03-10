@@ -12,7 +12,6 @@
          <children>
             <AnchorPane prefHeight="346.0" prefWidth="414.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TextField fx:id="parent" layoutX="103.0" layoutY="30.0" prefHeight="25.0" prefWidth="97.0" AnchorPane.topAnchor="16.0" />
                   <Text layoutX="12.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parent Module:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="20.0" />
                   <Text layoutX="22.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tuple Type:" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="100.05078125" />
                   <Text layoutX="15.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Child Module:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="58.0" />
@@ -29,6 +28,7 @@
                   <Text layoutX="207.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edge Type:" />
                   <TextField fx:id="direction" layoutX="281.0" layoutY="54.0" prefHeight="25.0" prefWidth="99.0" />
                   <Text layoutX="207.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction:" />
+                  <TextField fx:id="parent" layoutX="103.0" layoutY="16.0" prefHeight="25.0" prefWidth="99.0" />
                </children>
             </AnchorPane>
          </children>
