@@ -1,4 +1,0 @@
-default_edge 0 0 0 0 0 0 0
-default_edge 0 0 0 0 0 0 0
-default_edge 0 0 0 0 0 0 0
-default_edge 0 0 0 0 0 0 0

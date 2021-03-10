@@ -24,7 +24,8 @@ import javafx.stage.Stage;
 import javafx.scene.canvas.*;
 
 public class MainWindowController implements Initializable{
-	public List<String> str_list = new ArrayList<String>();
+	public List<String> nodeList = new ArrayList<String>();
+	public List<String> moduleList = new ArrayList<String>();
 	
 	@FXML
     private TextField deviceField;
@@ -61,6 +62,15 @@ public class MainWindowController implements Initializable{
     
     @FXML
     private Canvas topoField;
+    
+    @FXML
+    private MenuItem addMobileItem;
+
+    @FXML
+    private MenuItem addModuleItem;
+
+    @FXML
+    private MenuItem addAppEdgeItem;
 		
     //@FXML
     //private Button addCloudButton;
@@ -81,6 +91,9 @@ public class MainWindowController implements Initializable{
     
     @FXML
     private MenuItem resettxt;
+    
+    @FXML
+    private MenuItem newJson;
 
     private ObservableList<String> devices = FXCollections.observableArrayList();
     //private ObservableList<String> sensors= FXCollections.observableArrayList();
@@ -92,13 +105,111 @@ public class MainWindowController implements Initializable{
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	System.out.println("Init");
-    	str_list.add("test1");
-    	str_list.add("test2");
+    	nodeList.add("test1");
+    	nodeList.add("test2");
+    	moduleList.add("test1");
+    	moduleList.add("test2");
 //    	topoField.addEventHandler(MouseEvent.MOUSE_CLICKED, mEvent->mouseClickHandler(mEvent));
     }
     
     private void mouseClickHandler(MouseEvent mEvent){
     	System.out.println(mEvent.getSceneX()+", "+mEvent.getSceneY());
+    }
+    
+    @FXML
+    void createNewJson(ActionEvent event) {
+    	// menu item implementation
+    	try {	
+    		BorderPane root = FXMLLoader.load(getClass().getResource("createJsonBox.fxml"));
+    		Scene scene = new Scene(root,414,139);
+    		Stage stage = new Stage();
+    		stage.setScene(scene);
+    		stage.setTitle("Create New Design File");
+    		stage.show();    		
+    		//stage.close();
+    		
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    @FXML
+    void addAppEdgeHandler(ActionEvent event) {
+    	try {
+        	//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("InputBox.fxml"));
+    		FXMLLoader addAppEdgeLoader = new FXMLLoader(getClass().getResource("AppEdgeInputBox.fxml"));
+    		Scene scene = new Scene(addAppEdgeLoader.load(),414,346);
+    		Stage stage = new Stage();
+    		stage.setScene(scene);
+    		AppEdgeController saveNewNodeController = addAppEdgeLoader.getController();
+    		saveNewNodeController.populateParentList(moduleList);
+    		saveNewNodeController.populateChildList(moduleList);
+    		stage.setTitle("Add App Edge");
+    		stage.showAndWait();
+    		String edge = saveNewNodeController.getAppEdgeName();
+    		/*if(edge.isPresent()) {
+    			devices.add(edge.get());	
+    		}
+    		policyList.setItems(devices);*/
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    @FXML
+    void addMobileItemHandler(ActionEvent event) {
+    	try {	
+    		//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("InputBox.fxml"));
+    		FXMLLoader addNewNodeLoader = new FXMLLoader(getClass().getResource("InputBox.fxml"));
+    		Scene scene = new Scene(addNewNodeLoader.load(),450,320);
+    		Stage stage = new Stage();
+    		stage.setScene(scene);
+    		NodeController saveNewNodeController = addNewNodeLoader.getController();
+    		stage.setTitle("Add Mobile Node");
+    		stage.showAndWait();
+    		nodeList.add(saveNewNodeController.getNodeName().toString());
+    		for(String name : nodeList) {
+    			System.out.println(name.toString());
+    		}
+    		/*if (node == null || node.isEmpty()) {
+            	node = Optional.of("");
+           }*/
+    		/* if(node.isPresent()) {
+    			devices.add(node.get());	
+    			policyList.setItems(devices); 
+    		}
+    		else {
+    			
+    		}*/
+    		//policyList.setItems(devices); 
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    @FXML
+    void addModuleItemHandler(ActionEvent event) {
+    	try {
+        	//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("InputBox.fxml"));
+    		FXMLLoader addAppModuleLoader = new FXMLLoader(getClass().getResource("AppModuleInputBox.fxml"));
+    		Scene scene = new Scene(addAppModuleLoader.load(),414,346);
+    		Stage stage = new Stage();
+    		stage.setScene(scene);
+    		AppModuleController saveNewNodeController = addAppModuleLoader.getController();
+    		saveNewNodeController.populateList(nodeList);
+    		stage.setTitle("Add App Module");
+    		saveNewNodeController.setName("ss");
+    		stage.showAndWait();
+    		moduleList.add(saveNewNodeController.getAppModuleName().toString());
+    		System.out.println("Added module" + saveNewNodeController.getAppModuleName().toString());
+    		String module = saveNewNodeController.getAppModuleName();
+    		/*if(module.isPresent()) {
+    			devices.add(module.get());	
+    		}
+    		policyList.setItems(devices); */
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
     }
     
     @FXML
@@ -110,7 +221,8 @@ public class MainWindowController implements Initializable{
 		Stage stage = new Stage();
 		stage.setScene(scene);
 		AppEdgeController saveNewNodeController = addAppEdgeLoader.getController();
-		
+		saveNewNodeController.populateParentList(moduleList);
+		saveNewNodeController.populateChildList(moduleList);
 		stage.setTitle("Add App Edge");
 		stage.showAndWait();
 		String edge = saveNewNodeController.getAppEdgeName();
@@ -133,11 +245,12 @@ public class MainWindowController implements Initializable{
     		Stage stage = new Stage();
     		stage.setScene(scene);
     		AppModuleController saveNewNodeController = addAppModuleLoader.getController();
-    		saveNewNodeController.populateList(str_list);
+    		saveNewNodeController.populateList(nodeList);
     		stage.setTitle("Add App Module");
     		saveNewNodeController.setName("ss");
     		stage.showAndWait();
-    		
+    		moduleList.add(saveNewNodeController.getAppModuleName().toString());
+    		System.out.println("Added module" + saveNewNodeController.getAppModuleName().toString());
     		String module = saveNewNodeController.getAppModuleName();
     		/*if(module.isPresent()) {
     			devices.add(module.get());	
@@ -239,8 +352,8 @@ public class MainWindowController implements Initializable{
     		NodeController saveNewNodeController = addNewNodeLoader.getController();
     		stage.setTitle("Add Mobile Node");
     		stage.showAndWait();
-    		str_list.add(saveNewNodeController.getNodeName().toString());
-    		for(String name : str_list) {
+    		nodeList.add(saveNewNodeController.getNodeName().toString());
+    		for(String name : nodeList) {
     			System.out.println(name.toString());
     		}
     		/*if (node == null || node.isEmpty()) {

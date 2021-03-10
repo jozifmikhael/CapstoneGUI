@@ -3,10 +3,14 @@ package application;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 public class AppEdgeController {
@@ -39,9 +43,28 @@ public class AppEdgeController {
     private TextField direction;
 
     @FXML
+    private ChoiceBox<String> parentChoice;
+
+    @FXML
+    private ChoiceBox<String> childChoice;
+    
+    @FXML
     void saveAppEdgeHandler(ActionEvent event) {
     	appEdgeName = parent.getText()+"-"+child.getText()+" edge";
     	addLine();
+    }
+    
+    
+    void populateParentList(List<String> str_list) {
+    	ObservableList<String> items = FXCollections.observableArrayList();
+    	items.addAll(str_list);
+    	parentChoice.setItems(items);
+    }
+    
+    void populateChildList(List<String> str_list) {
+    	ObservableList<String> items = FXCollections.observableArrayList();
+    	items.addAll(str_list);
+    	childChoice.setItems(items);
     }
     
     private void addLine() {

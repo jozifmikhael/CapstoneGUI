@@ -65,12 +65,17 @@
                 <Menu mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem fx:id="newJson" mnemonicParsing="false" onAction="#createNewJson" text="Create New" />
+                        <MenuItem mnemonicParsing="false" text="Load Previous" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
                         <MenuItem mnemonicParsing="false" text="Delete" />
                     <MenuItem fx:id="resettxt" mnemonicParsing="false" onAction="#resetalltxt" text="Reset All Devices" />
+                        <MenuItem fx:id="addMobileItem" mnemonicParsing="false" onAction="#addMobileItemHandler" text="Add Mobile" />
+                        <MenuItem fx:id="addModuleItem" mnemonicParsing="false" onAction="#addModuleItemHandler" text="Add App Module" />
+                        <MenuItem fx:id="addAppEdgeItem" mnemonicParsing="false" onAction="#addAppEdgeHandler" text="Add App Edge" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
