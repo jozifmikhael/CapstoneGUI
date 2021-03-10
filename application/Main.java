@@ -14,6 +14,12 @@ import java.io.IOException;
 import org.fog.test.perfeval.VRGameFog_src;
 
 public class Main extends Application {
+	public static void main(String[] args) throws Exception {
+		System.out.println("Starting...");
+//		new VRGameFog_src("test6.json");
+		launch(args);
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -26,12 +32,6 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args) throws Exception {
-		System.out.println("Starting...");
-//		new VRGameFog_src("test6.json");
-		launch(args);
 	}
 	
 	@Override
