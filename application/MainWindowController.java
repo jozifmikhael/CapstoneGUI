@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -19,12 +20,40 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.canvas.*;
 
+
+
+
 public class MainWindowController implements Initializable{
-	public List<String> nodeList = new ArrayList<String>();
+	public class Node {
+		String name="err";
+		double posX=100;
+		double posY=100;
+		double r=40;
+		boolean dragging=false;
+		
+		Node(String _name, double _posX, double _posY, double _r){
+			name=_name;
+			posX=_posX;
+			posY=_posY;
+			r=_r;
+		}
+		
+		Node(String _name){
+			name=_name;
+		}
+		
+		public void stick() {
+			//TODO get the mouse's pos and update after adjusting for scene offsets etc.
+		}
+	}
+	private static boolean initFlag = true;
+	public List<Node> nodeList = new ArrayList<Node>();
 	public List<String> moduleList = new ArrayList<String>();
 	
 	@FXML
@@ -102,32 +131,56 @@ public class MainWindowController implements Initializable{
     @FXML
     private ListView<String> policyList;
     
+    @FXML
+    private AnchorPane backPane;
+        
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	System.out.println("Init");
-    	nodeList.add("test1");
-    	nodeList.add("test2");
-    	moduleList.add("test1");
-    	moduleList.add("test2");
+//    	nodeList.add("test1");
+//    	nodeList.add("test2");
+//    	moduleList.add("test1");
+//    	moduleList.add("test2");
 //    	topoField.addEventHandler(MouseEvent.MOUSE_CLICKED, mEvent->mouseClickHandler(mEvent));
     }
     
+    @FXML
     private void mouseClickHandler(MouseEvent mEvent){
-    	System.out.println(mEvent.getSceneX()+", "+mEvent.getSceneY());
+        GraphicsContext gc = topoField.getGraphicsContext2D();
+		gc.setFill(Color.WHITE);
+		System.out.println(backPane.getHeight() + "" + backPane.getWidth());
+		topoField.setHeight(backPane.getHeight());
+		topoField.setWidth(backPane.getWidth());
+		gc.fillRect(0, 0, topoField.getWidth(), topoField.getHeight());
+		gc.setFill(Color.RED);
+		
+		//TODO this will be a for-loop over the nodeList to iteratively draw
+		//will refer to the Node's x/y/r vals
+		//for nodes
+		//gc.fillOval(node.x, node.y, node.r+r, r+r);
+
+		double clickX=mEvent.getX();
+		double clickY=mEvent.getY();
+		//TODO here well do a check to see if its a pre-existing Node's bounding box
+		//if so well start editing that nodes x y pos onto the mouse's pos
+		
+		//placeholder
+		double r=40;
+		gc.fillOval(clickX-r, clickY-r, r+r, r+r);
+    	System.out.println(clickX+", "+clickY);
     }
     
     @FXML
     void createNewJson(ActionEvent event) {
     	// menu item implementation
     	try {	
-    		BorderPane root = FXMLLoader.load(getClass().getResource("createJsonBox.fxml"));
-    		Scene scene = new Scene(root,414,139);
+//    		BorderPane root = FXMLLoader.load(getClass().getResource("createJsonBox.fxml"));
+    		FXMLLoader root = new FXMLLoader(getClass().getResource("createJsonBox.fxml"));
+    		Scene scene = new Scene(root.load(),414,139);
     		Stage stage = new Stage();
     		stage.setScene(scene);
     		stage.setTitle("Create New Design File");
-    		stage.show();    		
-    		//stage.close();
-    		
+    		stage.show();
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
@@ -167,9 +220,9 @@ public class MainWindowController implements Initializable{
     		NodeController saveNewNodeController = addNewNodeLoader.getController();
     		stage.setTitle("Add Mobile Node");
     		stage.showAndWait();
-    		nodeList.add(saveNewNodeController.getNodeName().toString());
-    		for(String name : nodeList) {
-    			System.out.println(name.toString());
+    		nodeList.add(new Node(saveNewNodeController.getNodeName().toString()));
+    		for(Node node : nodeList) {
+    			System.out.println(node.name);
     		}
     		/*if (node == null || node.isEmpty()) {
             	node = Optional.of("");
@@ -196,7 +249,7 @@ public class MainWindowController implements Initializable{
     		Stage stage = new Stage();
     		stage.setScene(scene);
     		AppModuleController saveNewNodeController = addAppModuleLoader.getController();
-    		saveNewNodeController.populateList(nodeList);
+    		saveNewNodeController.populateList(nodeList.stream().map(n->n.name).collect(Collectors.toList()));
     		stage.setTitle("Add App Module");
     		saveNewNodeController.setName("ss");
     		stage.showAndWait();
@@ -245,7 +298,7 @@ public class MainWindowController implements Initializable{
     		Stage stage = new Stage();
     		stage.setScene(scene);
     		AppModuleController saveNewNodeController = addAppModuleLoader.getController();
-    		saveNewNodeController.populateList(nodeList);
+    		saveNewNodeController.populateList(nodeList.stream().map(n->n.name).collect(Collectors.toList()));
     		stage.setTitle("Add App Module");
     		saveNewNodeController.setName("ss");
     		stage.showAndWait();
@@ -352,9 +405,9 @@ public class MainWindowController implements Initializable{
     		NodeController saveNewNodeController = addNewNodeLoader.getController();
     		stage.setTitle("Add Mobile Node");
     		stage.showAndWait();
-    		nodeList.add(saveNewNodeController.getNodeName().toString());
-    		for(String name : nodeList) {
-    			System.out.println(name.toString());
+    		nodeList.add(new Node(saveNewNodeController.getNodeName()));
+    		for(Node node : nodeList) {
+    			System.out.println(node.name);
     		}
     		/*if (node == null || node.isEmpty()) {
             	node = Optional.of("");
