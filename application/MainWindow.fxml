@@ -2,7 +2,6 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -16,77 +15,58 @@
    <center>
       <AnchorPane prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <SplitPane dividerPositions="0.7338709677419355" layoutX="142.0" layoutY="65.0" orientation="VERTICAL" prefHeight="401.0" prefWidth="462.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <SplitPane dividerPositions="0.058823529411764705, 0.884453781512605" layoutX="142.0" layoutY="65.0" orientation="VERTICAL" prefHeight="401.0" prefWidth="462.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
+                  <MenuBar>
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Close" />
+                              <MenuItem fx:id="newJson" mnemonicParsing="false" onAction="#createNewJson" text="Create New" />
+                              <MenuItem mnemonicParsing="false" text="Load Previous" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Edit">
+                        <items>
+                              <MenuItem mnemonicParsing="false" text="Delete" />
+                          <MenuItem fx:id="resettxt" mnemonicParsing="false" onAction="#resetalltxt" text="Reset All Devices" />
+                              <MenuItem fx:id="addMobileItem" mnemonicParsing="false" onAction="#addMobileItemHandler" text="Add Mobile" />
+                              <MenuItem fx:id="addModuleItem" mnemonicParsing="false" onAction="#addModuleItemHandler" text="Add App Module" />
+                              <MenuItem fx:id="addAppEdgeItem" mnemonicParsing="false" onAction="#addAppEdgeHandler" text="Add App Edge" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="About" />
+                        </items>
+                      </Menu>
+                        <Menu mnemonicParsing="false" text="Policy">
+                          <items>
+                            <MenuItem fx:id="ProfitAwareItem" mnemonicParsing="false" onAction="#confirmPolicy" text="Profit Aware Policy" />
+                              <MenuItem fx:id="QosItem" mnemonicParsing="false" onAction="#confirmPolicy" text="QoS Policy" />
+                              <MenuItem fx:id="LowestPowerItem" mnemonicParsing="false" onAction="#confirmPolicy" text="Lowest Power Policy" />
+                          </items>
+                        </Menu>
+                    </menus>
+                  </MenuBar>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <SplitPane dividerPositions="0.30045871559633025, 0.5711009174311926" layoutX="168.0" layoutY="-13.0" prefHeight="500.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
-                          <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="180.0">
-                                 <children>
-                                    <Text layoutX="91.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Devices" />
-                                    <Text layoutX="78.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Design File" />
-                                 </children>
-                              </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="260.0">
-                                 <children>
-                                    <ListView fx:id="policyList" layoutY="39.0" onMouseClicked="#displaySelected" prefHeight="192.0" prefWidth="245.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="39.0" />
-                                    <Text layoutX="27.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Devices" />
-                                    <Button fx:id="listEditBttn" layoutX="9.0" layoutY="303.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editBttnHandler" prefHeight="25.0" prefWidth="95.0" text="Edit" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
-                                    <Button fx:id="listDeleteBttn" layoutX="164.0" layoutY="238.0" mnemonicParsing="false" onAction="#deleteBttnHandler" prefHeight="17.0" prefWidth="95.0" text="Delete" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="385.0">
-                                 <children>
-                                    <Canvas fx:id="topoField" height="310.0" layoutX="23.0" layoutY="23.0" width="303.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0" />
-                                 </children>
-                              </AnchorPane>
-                          </items>
-                        </SplitPane>
+                        <Canvas fx:id="topoField" height="383.0" width="870.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="1.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="701.0">
                      <children>
-                        <TextField fx:id="simulationTime" layoutX="117.0" layoutY="14.0" />
-                        <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation Time:" />
-                        <TextField fx:id="policyView" layoutX="117.0" layoutY="54.0" />
-                        <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Policy Selected:" />
-                        <Button fx:id="startButton" layoutX="290.0" layoutY="54.0" mnemonicParsing="false" onAction="#startSim" text="Start" />
-                     </children></AnchorPane>
+                        <TextField fx:id="simulationTime" layoutX="11.0" layoutY="21.0" prefWidth="150.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+                        <Text layoutX="42.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation Time" textAlignment="CENTER" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="43.0" />
+                        <TextField fx:id="policyView" layoutX="160.0" layoutY="21.0" prefWidth="150.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="170.0" />
+                        <Text layoutX="182.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Policy Selected" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="208.0" />
+                        <Button fx:id="startButton" layoutX="309.0" layoutY="21.0" mnemonicParsing="false" onAction="#startSim" text="Start" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="330.0" />
+                        <Button fx:id="listDeleteBttn" layoutX="772.0" layoutY="21.0" mnemonicParsing="false" onAction="#deleteBttnHandler" prefWidth="100.0" text="Delete" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                        <Button fx:id="listEditBttn" layoutX="677.0" layoutY="21.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editBttnHandler" prefWidth="100.0" text="Edit" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="120.0" />
+                     </children>
+                  </AnchorPane>
               </items>
             </SplitPane>
-            <MenuBar layoutY="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem fx:id="newJson" mnemonicParsing="false" onAction="#createNewJson" text="Create New" />
-                        <MenuItem mnemonicParsing="false" text="Load Previous" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    <MenuItem fx:id="resettxt" mnemonicParsing="false" onAction="#resetalltxt" text="Reset All Devices" />
-                        <MenuItem fx:id="addMobileItem" mnemonicParsing="false" onAction="#addMobileItemHandler" text="Add Mobile" />
-                        <MenuItem fx:id="addModuleItem" mnemonicParsing="false" onAction="#addModuleItemHandler" text="Add App Module" />
-                        <MenuItem fx:id="addAppEdgeItem" mnemonicParsing="false" onAction="#addAppEdgeHandler" text="Add App Edge" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-                  <Menu mnemonicParsing="false" text="Policy">
-                    <items>
-                      <MenuItem fx:id="ProfitAwareItem" mnemonicParsing="false" onAction="#confirmPolicy" text="Profit Aware Policy" />
-                        <MenuItem fx:id="QosItem" mnemonicParsing="false" onAction="#confirmPolicy" text="QoS Policy" />
-                        <MenuItem fx:id="LowestPowerItem" mnemonicParsing="false" onAction="#confirmPolicy" text="Lowest Power Policy" />
-                    </items>
-                  </Menu>
-              </menus>
-            </MenuBar>
          </children>
       </AnchorPane>
    </center>
