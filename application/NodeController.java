@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -47,6 +48,7 @@ public class NodeController {
 
     @FXML
 	void saveNodeHandler(ActionEvent event) {
+    	Stage stage = (Stage) saveNode.getScene().getWindow();
  	   if (name.getText().trim().isEmpty()) {
  		   name.setText("default_mobile");
  	   		 } 
@@ -77,8 +79,8 @@ public class NodeController {
  	   
  	nodeName = name.getText();
  	addLine();
- 	
- }
+ 	stage.close();
+    }
     
     private void addLine() {
         String line = name.getText().toString() +" " +mips.getText() +" " +ram.getText() +" " +upbw.getText() +" " +downbw.getText()+" " +nodelvl.getText()+" " +ratePerMIPS.getText() +" " +busyPower.getText()+" " +idlePower.getText() +"\n";

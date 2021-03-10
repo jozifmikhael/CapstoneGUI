@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AppModuleController {
 	private String newStr;
@@ -57,8 +58,40 @@ public class AppModuleController {
     
     @FXML
     void saveModuleHandler(ActionEvent event) {
+    	Stage stage = (Stage) saveModule.getScene().getWindow();
+    	
+		if (nodeName.getText().trim().isEmpty()) {
+			nodeName.setText("default_module");
+		   		 } 
+		   if (moduleName.getText().trim().isEmpty()) {
+			  moduleName.setText("0");
+		         } 
+		   if (ram.getText().trim().isEmpty()) {
+			   ram.setText("0");
+		         } 
+		   if (MIPS.getText().trim().isEmpty()) {
+			  MIPS.setText("0");
+		         } 
+		   if (size.getText().trim().isEmpty()) {
+			  size.setText("0");
+		         } 
+		   if (bandwidth.getText().trim().isEmpty()) {
+			  bandwidth.setText("0");
+		         } 
+		   if (inTuple.getText().trim().isEmpty()) {
+			  inTuple.setText("0");
+		         } 
+		   if (outTuple.getText().trim().isEmpty()) {
+			  outTuple.setText("0");
+		         } 
+		   if (fractionalSensitivity.getText().trim().isEmpty()) {
+			  fractionalSensitivity.setText("0");
+		 } 
+
     	appModuleName = moduleName.getText();
     	addLine();
+    	
+    	stage.close();
     }
     
     void populateList(List<String> str_list) {
@@ -68,7 +101,6 @@ public class AppModuleController {
     }
     
     private void addLine() {
-    	nodeName.setText("default_module"); moduleName.setText("0"); ram.setText("0"); MIPS.setText("0"); size.setText("0"); bandwidth.setText("0"); inTuple.setText("0"); outTuple.setText("0"); fractionalSensitivity.setText("0");
         String line = nodeName.getText() +" " +moduleName.getText() +" " +ram.getText() +" " +MIPS.getText() +" " +size.getText()+" " +bandwidth.getText()+" "+ inTuple.getText()+" " +outTuple.getText() +" "+fractionalSensitivity.getText() +"\n";
         FileWriter file_writer;
         try {

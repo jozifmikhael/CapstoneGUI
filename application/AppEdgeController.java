@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AppEdgeController {
 	String appEdgeName;
@@ -50,8 +51,38 @@ public class AppEdgeController {
     
     @FXML
     void saveAppEdgeHandler(ActionEvent event) {
+    	
+    	Stage stage = (Stage) saveAppEdge.getScene().getWindow();
+    	
+    	if (parent.getText().trim().isEmpty()) {
+    		parent.setText("default_edge");
+ 	   		 } 
+ 	   if (child.getText().trim().isEmpty()) {
+ 		  child.setText("0");
+ 	         } 
+ 	   if (periodicity.getText().trim().isEmpty()) {
+ 		  periodicity.setText("0");
+ 	         } 
+ 	   if (cpuLength.getText().trim().isEmpty()) {
+ 		  cpuLength.setText("0");
+ 	         } 
+ 	   if (newLength.getText().trim().isEmpty()) {
+ 		  newLength.setText("0");
+ 	         } 
+ 	   if (tupleType.getText().trim().isEmpty()) {
+ 		  tupleType.setText("0");
+ 	         } 
+ 	   if (direction.getText().trim().isEmpty()) {
+ 		  direction.setText("0");
+ 	         } 
+ 	   if (edgeType.getText().trim().isEmpty()) {
+ 		  edgeType.setText("0");
+ 	         } 
+ 	  
     	appEdgeName = parent.getText()+"-"+child.getText()+" edge";
     	addLine();
+    	
+    	stage.close();
     }
     
     
@@ -68,7 +99,7 @@ public class AppEdgeController {
     }
     
     private void addLine() {
-    	parent.setText("default_edge"); child.setText("0"); periodicity.setText("0"); cpuLength.setText("0"); newLength.setText("0"); tupleType.setText("0"); direction.setText("0"); edgeType.setText("0");
+//    	parent.setText("default_edge"); child.setText("0"); periodicity.setText("0"); cpuLength.setText("0"); newLength.setText("0"); tupleType.setText("0"); direction.setText("0"); edgeType.setText("0");
         String line = parent.getText() +" " +child.getText() +" "+periodicity.getText()+" " +cpuLength.getText() +" " +newLength.getText()+" " +tupleType.getText()+" " +direction.getText() +" " +edgeType.getText()+"\n";
         FileWriter file_writer;
         try {
