@@ -109,7 +109,7 @@ public class SampleController implements Initializable{
 		Scene scene = new Scene(addAppEdgeLoader.load(),414,346);
 		Stage stage = new Stage();
 		stage.setScene(scene);
-		AppEdgeInputController saveNewNodeController = addAppEdgeLoader.getController();
+		AppEdgeController saveNewNodeController = addAppEdgeLoader.getController();
 		
 		stage.setTitle("Add App Edge");
 		stage.showAndWait();
