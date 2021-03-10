@@ -15,6 +15,6 @@
 	<classpathentry exported="true" kind="lib" path="jars/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/json-simple-1.1.1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/iFogSim_v1"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/iFogSim_Sim"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
