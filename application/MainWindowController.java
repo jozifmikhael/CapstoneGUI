@@ -68,61 +68,37 @@ public class MainWindowController implements Initializable{
     @FXML
     private MenuItem LowestPowerItem;
     
-    @FXML
-    private Button exitButton;
     
-    @FXML
-    private Button listEditBttn;
 
-    @FXML
-    private Button listDeleteBttn;
-    
     @FXML
     private TextField simulationTime;
 
     @FXML
     private TextField policyView;
     
-	@FXML
-    private Button addMobileButton;
+    @FXML
+    private Button editButton;
 
     @FXML
-    private Button createJsonButton;
+    private Button deleteButton;
     
     @FXML
     private Canvas topoField;
     
     @FXML
-    private MenuItem addMobileItem;
+    private MenuItem addNodeMenu;
 
     @FXML
-    private MenuItem addModuleItem;
+    private MenuItem addModuleMenu;
 
     @FXML
-    private MenuItem addAppEdgeItem;
-		
-    //@FXML
-    //private Button addCloudButton;
-
-    //@FXML
-    //private Button addComputerButton;
-
-    //@FXML
-    //private Button addSensorButton;
-
-    //@FXML
-    //private Button addActuatorButton;
-    @FXML
-    private Button addModule;
-
-    @FXML
-    private Button addAppEdge;
+    private MenuItem addEdgeMenu;
     
     @FXML
-    private MenuItem resettxt;
+    private MenuItem resetCacheMenu;
     
     @FXML
-    private MenuItem newJson;
+    private MenuItem newJSONMenu;
 
     private ObservableList<String> devices = FXCollections.observableArrayList();
     //private ObservableList<String> sensors= FXCollections.observableArrayList();
@@ -171,7 +147,7 @@ public class MainWindowController implements Initializable{
     }
     
     @FXML
-    void createNewJson(ActionEvent event) {
+    void newJSON(ActionEvent event) {
     	// menu item implementation
     	try {	
 //    		BorderPane root = FXMLLoader.load(getClass().getResource("createJsonBox.fxml"));
@@ -187,30 +163,7 @@ public class MainWindowController implements Initializable{
     }
     
     @FXML
-    void addAppEdgeHandler(ActionEvent event) {
-    	try {
-        	//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("InputBox.fxml"));
-    		FXMLLoader addAppEdgeLoader = new FXMLLoader(getClass().getResource("AppEdgeInputBox.fxml"));
-    		Scene scene = new Scene(addAppEdgeLoader.load(),414,346);
-    		Stage stage = new Stage();
-    		stage.setScene(scene);
-    		AppEdgeController saveNewNodeController = addAppEdgeLoader.getController();
-    		saveNewNodeController.populateParentList(moduleList);
-    		saveNewNodeController.populateChildList(moduleList);
-    		stage.setTitle("Add App Edge");
-    		stage.showAndWait();
-    		String edge = saveNewNodeController.getAppEdgeName();
-    		/*if(edge.isPresent()) {
-    			devices.add(edge.get());	
-    		}
-    		policyList.setItems(devices);*/
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    }
-    
-    @FXML
-    void addMobileItemHandler(ActionEvent event) {
+    void addNode(ActionEvent event) {
     	try {	
     		//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("InputBox.fxml"));
     		FXMLLoader addNewNodeLoader = new FXMLLoader(getClass().getResource("InputBox.fxml"));
@@ -241,32 +194,7 @@ public class MainWindowController implements Initializable{
     }
     
     @FXML
-    void addModuleItemHandler(ActionEvent event) {
-    	try {
-        	//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("InputBox.fxml"));
-    		FXMLLoader addAppModuleLoader = new FXMLLoader(getClass().getResource("AppModuleInputBox.fxml"));
-    		Scene scene = new Scene(addAppModuleLoader.load(),414,346);
-    		Stage stage = new Stage();
-    		stage.setScene(scene);
-    		AppModuleController saveNewNodeController = addAppModuleLoader.getController();
-    		saveNewNodeController.populateList(nodeList.stream().map(n->n.name).collect(Collectors.toList()));
-    		stage.setTitle("Add App Module");
-    		saveNewNodeController.setName("ss");
-    		stage.showAndWait();
-    		moduleList.add(saveNewNodeController.getAppModuleName().toString());
-    		System.out.println("Added module" + saveNewNodeController.getAppModuleName().toString());
-    		String module = saveNewNodeController.getAppModuleName();
-    		/*if(module.isPresent()) {
-    			devices.add(module.get());	
-    		}
-    		policyList.setItems(devices); */
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    }
-    
-    @FXML
-    void addAppEdge(ActionEvent event) {
+    void addEdge(ActionEvent event) {
     try {
     	//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("InputBox.fxml"));
 		FXMLLoader addAppEdgeLoader = new FXMLLoader(getClass().getResource("AppEdgeInputBox.fxml"));
@@ -315,12 +243,12 @@ public class MainWindowController implements Initializable{
     }
     
     @FXML
-    void deleteBttnHandler(ActionEvent event) {
+    void deleteHandler(ActionEvent event) {
     	
     }
 
     @FXML
-    void editBttnHandler(ActionEvent event) {
+    void editHandler(ActionEvent event) {
     	
     }
     
@@ -394,36 +322,7 @@ public class MainWindowController implements Initializable{
     	stage.close();
     }
 
-    @FXML
-    void addMobile(ActionEvent event) {
-    	try {	
-    		//BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("InputBox.fxml"));
-    		FXMLLoader addNewNodeLoader = new FXMLLoader(getClass().getResource("InputBox.fxml"));
-    		Scene scene = new Scene(addNewNodeLoader.load(),450,320);
-    		Stage stage = new Stage();
-    		stage.setScene(scene);
-    		NodeController saveNewNodeController = addNewNodeLoader.getController();
-    		stage.setTitle("Add Mobile Node");
-    		stage.showAndWait();
-    		nodeList.add(new Node(saveNewNodeController.getNodeName()));
-    		for(Node node : nodeList) {
-    			System.out.println(node.name);
-    		}
-    		/*if (node == null || node.isEmpty()) {
-            	node = Optional.of("");
-           }*/
-    		/* if(node.isPresent()) {
-    			devices.add(node.get());	
-    			policyList.setItems(devices); 
-    		}
-    		else {
-    			
-    		}*/
-    		//policyList.setItems(devices); 
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    }
+    
 
    /* @FXML
     void addSensor(ActionEvent event) {
@@ -508,7 +407,7 @@ public class MainWindowController implements Initializable{
 	}
     
     @FXML
-    void resetalltxt(ActionEvent event) {
+    void resetCache(ActionEvent event) {
     	System.out.println("resetting all text files");
     	FileWriter file_writer;
         try {
